@@ -29,9 +29,9 @@
   var con = db.ref('concepts');
 
   var update = function(snapshot) {
-    $.extend(data, $snapshot.val());
-    console.log(data);
-    window.data = data;
+    $.extend(data, snapshot.val());
+    console.log(data);  // !!!
+    window.data = data; // !!!
   };
 
   var send = function(concept) {
@@ -41,8 +41,11 @@
 
   con.on('value', update);
 
+  // !!!
+
   window.db = db;
   window.con = con;
+  window.update = update;
   window.send = send;
 
 })();
