@@ -31,12 +31,13 @@
   var wordCloud = function() {
     var r = [];
     for (var word in data) {
-      if (data[word]) {
-        r.push({
-          text: word,
-          weight: data[word]
-        });
-      }
+      r.push({
+        text: word,
+        weight: data[word] + 1,
+        html: {
+          class: "a_word"
+        }
+      });
     }
 
     return r;
@@ -45,8 +46,6 @@
   var update = function(snapshot) {
     $.extend(data, snapshot.val());
     $('#words').jQCloud('update', wordCloud());
-    console.log(data);  // !!!
-    window.data = data; // !!!
   };
 
   var send = function(concept) {
@@ -54,15 +53,20 @@
     con.child(concept).set(data[concept] + 1);
   }
 
+  var get_and_send = function(evt) {
+    var value = $(this).text();
+    send(value);
+  }
+
   $('#words').jQCloud(wordCloud());
   con.on('value', update);
 
-  // !!!
+  $('#words').on('click', '.a_word', get_and_send);
+  $('#new').on('submit', function(evt) {
+    var value = $(this).find('input').val();
+    send(value);
 
-  window.db = db;
-  window.con = con;
-  window.update = update;
-  window.send = send;
-  window.wordCloud = wordCloud;
+    return false;
+  })
 
 })();
