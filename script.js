@@ -31,10 +31,12 @@
   var wordCloud = function() {
     var r = [];
     for (var word in data) {
-      r.push({
-        text: word,
-        weight: data[word]
-      });
+      if (data[word]) {
+        r.push({
+          text: word,
+          weight: data[word]
+        });
+      }
     }
 
     return r;
