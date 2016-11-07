@@ -39,6 +39,10 @@
     con.child(concept).set(data[concept] + 1);
   }
 
+  con.on('value', up);
+
+  window.db = db;
+  window.con = con;
   window.send = send;
 
 })();
