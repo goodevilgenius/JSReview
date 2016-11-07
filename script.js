@@ -39,7 +39,7 @@
     con.child(concept).set(data[concept] + 1);
   }
 
-  con.on('value', up);
+  con.on('value', update);
 
   window.db = db;
   window.con = con;
