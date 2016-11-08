@@ -23,6 +23,7 @@
     "pseudocode": 0,
     "functions": 0,
     "random numbers": 0,
+    "events": 0,
   };
 
   var db = firebase.database();
